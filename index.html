@@ -99,126 +99,120 @@
         .btn-secondary:hover { border-color: var(--primary); }
 
         /* ========================================= */
-/* SEPARADOR DE MARCA - TRAMA CON BLUR */
-/* ========================================= */
-.brand-divider { 
-    position: relative; 
-    padding: 6rem 5%; 
-    overflow: hidden;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
+        /* SEPARADOR DE MARCA - TRAMA CON BLUR */
+        /* ========================================= */
+        .brand-divider { 
+            position: relative; 
+            padding: 6rem 5%; 
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
 
-/* Imagen de fondo con blur - MODO CLARO */
-.brand-divider-bg {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    background-image: url('./trama-clara.png');
-    background-repeat: repeat;
-    background-size: 200px;
-    filter: blur(6px);
-    opacity: 0.4;
-    z-index: 0;
-}
+        .brand-divider-bg {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background-image: url('./trama-clara.png');
+            background-repeat: repeat;
+            background-size: 200px;
+            filter: blur(6px);
+            opacity: 0.4;
+            z-index: 0;
+        }
 
-/* Imagen de fondo con blur - MODO OSCURO */
-body.dark-mode .brand-divider-bg {
-    background-image: url('./trama-oscura.png');
-    opacity: 0.3;
-}
+        body.dark-mode .brand-divider-bg {
+            background-image: url('./trama-oscura.png');
+            opacity: 0.3;
+        }
 
-/* Overlay para asegurar legibilidad del texto */
-.brand-divider-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.6);
-    z-index: 1;
-}
-body.dark-mode .brand-divider-overlay {
-    background: rgba(10, 10, 10, 0.6);
-}
+        .brand-divider-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            z-index: 1;
+        }
+        body.dark-mode .brand-divider-overlay {
+            background: rgba(10, 10, 10, 0.6);
+        }
 
-/* Contenedor del contenido (imagen + texto) */
-.brand-divider-content {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 4rem;
-    align-items: center;
-}
+        .brand-divider-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 4rem;
+            align-items: center;
+        }
 
-/* Imagen nítida al costado */
-.divider-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.divider-image img {
-    width: 220px;
-    height: auto;
-    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
-    margin-bottom: 1.5rem;
-}
+        .divider-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .divider-image img {
+            width: 220px;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
 
-/* Texto al otro lado */
-.divider-text {
-    text-align: left;
-}
-.sub-brand-badge { 
-    display: inline-block; 
-    padding: 6px 16px; 
-    border: 1px solid var(--primary); 
-    border-radius: 20px; 
-    font-size: 0.7rem; 
-    text-transform: uppercase; 
-    letter-spacing: 0.15em; 
-    margin-bottom: 1.5rem; 
-    font-weight: 700; 
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(4px);
-}
-body.dark-mode .sub-brand-badge {
-    background: rgba(0,0,0,0.7);
-}
-.brand-divider h2 { 
-    font-size: 2.5rem; 
-    margin-bottom: 1.2rem; 
-    line-height: 1.2;
-    color: var(--text);
-}
-.brand-divider p { 
-    color: var(--text-muted); 
-    font-size: 1.05rem;
-    line-height: 1.8;
-    font-weight: 400; 
-}
+        .divider-text {
+            text-align: left;
+        }
+        .sub-brand-badge { 
+            display: inline-block; 
+            padding: 6px 16px; 
+            border: 1px solid var(--primary); 
+            border-radius: 20px; 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.15em; 
+            margin-bottom: 1.5rem; 
+            font-weight: 700; 
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(4px);
+        }
+        body.dark-mode .sub-brand-badge {
+            background: rgba(0,0,0,0.7);
+        }
+        .brand-divider h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            line-height: 1.2;
+            color: var(--text);
+        }
+        .brand-divider p { 
+            color: var(--text-muted); 
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-weight: 400; 
+        }
 
-/* Responsive para móviles */
-@media (max-width: 768px) {
-    .brand-divider { padding: 4rem 1.5rem; }
-    .brand-divider-content { 
-        grid-template-columns: 1fr; 
-        gap: 2rem;
-        text-align: center;
-    }
-    .divider-text { text-align: center; }
-    .divider-image img { width: 160px; }
-    .brand-divider h2 { font-size: 1.8rem; }
-}
+        @media (max-width: 768px) {
+            .brand-divider { padding: 4rem 1.5rem; }
+            .brand-divider-content { 
+                grid-template-columns: 1fr; 
+                gap: 2rem;
+                text-align: center;
+            }
+            .divider-text { text-align: center; }
+            .divider-image img { width: 160px; }
+            .brand-divider h2 { font-size: 1.8rem; }
+        }
 
         /* FILTROS */
         .filters-section { background: var(--background); padding: 2rem 1rem; position: sticky; top: 73px; z-index: 50; border-bottom: 1px solid var(--border); }
@@ -322,6 +316,17 @@ body.dark-mode .sub-brand-badge {
             .main-image { height: 400px; }
             .cart-panel { width: 100%; right: -100%; }
         }
+
+        /* ========================================= */
+        /* CORRECCIÓN MODO OSCURO PARA IMÁGENES */
+        /* ========================================= */
+        body.dark-mode .logo-img {
+            filter: invert(1); /* Invierte el negro a blanco */
+        }
+        
+        body.dark-mode .divider-image img {
+            filter: invert(1) drop-shadow(0 10px 30px rgba(255,255,255,0.15)); /* Invierte a blanco y cambia la sombra a blanca sutil */
+        }
     </style>
 </head>
 <body>
@@ -380,19 +385,14 @@ body.dark-mode .sub-brand-badge {
     <!-- SEPARADOR SUB-MARCA - TRAMA CON BLUR -->
     <!-- ========================================= -->
     <section id="linea-profesional" class="brand-divider">
-        <!-- Capa 1: Trama de fondo con blur -->
         <div class="brand-divider-bg"></div>
-        <!-- Capa 2: Overlay para legibilidad -->
         <div class="brand-divider-overlay"></div>
         
-        <!-- Capa 3: Contenido (imagen nítida + texto) -->
         <div class="brand-divider-content">
-            <!-- Imagen nítida al costado (favicon/logo) -->
             <div class="divider-image">
                 <img src="favicon.png" alt="Mhoa Professional">
             </div>
             
-            <!-- Texto al otro lado -->
             <div class="divider-text">
                 <span class="sub-brand-badge">Mhoa Professional</span>
                 <h2>Diseño profesional que se siente como alta costura</h2>
