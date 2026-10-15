@@ -12,7 +12,7 @@
     
     <meta property="og:title" content="Mhoa | Alta Costura y Diseño Profesional">
     <meta property="og:description" content="Elegancia a medida. Funcionalidad con propósito. Descubrí nuestra línea de alta costura y uniformes profesionales.">
-    <meta property="og:image" content="hero-bg.jpeg">
+    <meta property="og:image" content="favicon.png">
     <meta property="og:url" content="https://tu-usuario.github.io/mhoa/">
     <meta property="og:type" content="website">
 
@@ -22,15 +22,12 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Playfair Display para elegancia (títulos) + Inter para legibilidad (cuerpo) -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- Librería para leer Google Sheets (CSV) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
         :root {
-            /* Paleta Estricta Blanco y Negro con grises de soporte */
             --primary: #000000;
             --primary-dark: #1a1a1a;
             --primary-light: #404040;
@@ -62,24 +59,28 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--background); color: var(--text); line-height: 1.6; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--background); color: var(--text); line-height: 1.6; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.02em; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         img { max-width: 100%; display: block; }
-        button { font-family: 'Inter', sans-serif; cursor: pointer; }
+        button { font-family: 'Montserrat', sans-serif; cursor: pointer; }
 
         /* HEADER */
-        header { background: var(--background); padding: 1.2rem 5%; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); backdrop-filter: blur(10px); background-color: rgba(255,255,255,0.9); }
-        body.dark-mode header { background-color: rgba(10,10,10,0.9); }
+        header { background: var(--background); padding: 1rem 5%; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); backdrop-filter: blur(10px); background-color: rgba(255,255,255,0.95); }
+        body.dark-mode header { background-color: rgba(10,10,10,0.95); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); }
+        
+        .logo-container { display: flex; align-items: center; }
+        .logo-img { height: 50px; width: auto; transition: var(--transition); }
+        .logo-img:hover { transform: scale(1.05); opacity: 0.8; }
+        
         .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { color: var(--text); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; position: relative; }
+        .nav-links a { color: var(--text); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; position: relative; }
         .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--primary); transition: var(--transition); }
         .nav-links a:hover::after { width: 100%; }
         
         .controls { display: flex; gap: 12px; align-items: center; }
-        .control-btn, .cart-btn { background: transparent; border: 1px solid var(--border); padding: 8px 16px; border-radius: 4px; font-weight: 500; color: var(--text); font-size: 0.85rem; display: flex; align-items: center; gap: 6px; transition: var(--transition); }
+        .control-btn, .cart-btn { background: transparent; border: 1px solid var(--border); padding: 8px 16px; border-radius: 4px; font-weight: 600; color: var(--text); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px; transition: var(--transition); }
         .control-btn:hover, .cart-btn:hover { border-color: var(--primary); background: var(--primary); color: var(--background); }
         .cart-count { background: var(--primary); color: var(--background); border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
         body.dark-mode .cart-count { background: var(--background); color: var(--primary); }
@@ -88,25 +89,141 @@
         .hero { background: var(--background); color: var(--text); text-align: center; padding: 8rem 1rem 6rem; position: relative; overflow: hidden; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, var(--surface) 0%, transparent 70%); z-index: 0; }
         .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-        .hero h1 { font-size: 4rem; margin-bottom: 1.5rem; line-height: 1.1; font-weight: 400; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.1; font-weight: 400; }
         .hero h1 em { font-style: italic; font-weight: 600; }
-        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 2.5rem; color: var(--text-muted); font-weight: 300; }
+        .hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto 2.5rem; color: var(--text-muted); font-weight: 400; }
         .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn-primary { background: var(--primary); color: var(--background); padding: 14px 36px; border-radius: 2px; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--primary); }
+        .btn-primary { background: var(--primary); color: var(--background); padding: 14px 36px; border-radius: 2px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--primary); }
         .btn-primary:hover { background: transparent; color: var(--primary); }
-        .btn-secondary { background: transparent; color: var(--text); padding: 14px 36px; border-radius: 2px; font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--border); }
+        .btn-secondary { background: transparent; color: var(--text); padding: 14px 36px; border-radius: 2px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--border); }
         .btn-secondary:hover { border-color: var(--primary); }
 
-        /* SEPARADOR DE MARCA */
-        .brand-divider { text-align: center; padding: 4rem 1rem; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-        .brand-divider h2 { font-size: 2rem; margin-bottom: 1rem; }
-        .brand-divider p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-        .sub-brand-badge { display: inline-block; padding: 6px 16px; border: 1px solid var(--primary); border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1.5rem; font-weight: 600; }
+        /* ========================================= */
+        /* SEPARADOR DE MARCA - TRAMA CON BLUR */
+        /* ========================================= */
+        .brand-divider { 
+            position: relative; 
+            padding: 6rem 5%; 
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Imagen de fondo con blur - MODO CLARO */
+        .brand-divider-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('trama-clara.png');
+            background-repeat: repeat;
+            background-size: 180px; /* Ajustá este valor para hacer el patrón más grande o chico */
+            filter: blur(8px);
+            transform: scale(1.05);
+            z-index: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Imagen de fondo con blur - MODO OSCURO */
+        body.dark-mode .brand-divider-bg {
+            background-image: url('trama-oscura.png');
+        }
+        
+        /* Overlay para asegurar legibilidad del texto */
+        .brand-divider-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+        body.dark-mode .brand-divider-overlay {
+            background: rgba(10, 10, 10, 0.85);
+        }
+        
+        /* Contenedor del contenido (imagen + texto) */
+        .brand-divider-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        /* Imagen nítida al costado */
+        .divider-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .divider-image img {
+            width: 220px;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Texto al otro lado */
+        .divider-text {
+            text-align: left;
+        }
+        .sub-brand-badge { 
+            display: inline-block; 
+            padding: 6px 16px; 
+            border: 1px solid var(--primary); 
+            border-radius: 20px; 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.15em; 
+            margin-bottom: 1.5rem; 
+            font-weight: 700; 
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(4px);
+        }
+        body.dark-mode .sub-brand-badge {
+            background: rgba(0,0,0,0.5);
+        }
+        .brand-divider h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            line-height: 1.2;
+            color: var(--text);
+        }
+        .brand-divider p { 
+            color: var(--text-muted); 
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-weight: 400; 
+        }
+        
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .brand-divider { padding: 4rem 1.5rem; }
+            .brand-divider-content { 
+                grid-template-columns: 1fr; 
+                gap: 2rem;
+                text-align: center;
+            }
+            .divider-text { text-align: center; }
+            .divider-image img { width: 160px; }
+            .brand-divider h2 { font-size: 1.8rem; }
+        }
 
         /* FILTROS */
         .filters-section { background: var(--background); padding: 2rem 1rem; position: sticky; top: 73px; z-index: 50; border-bottom: 1px solid var(--border); }
         .filters { text-align: center; max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-        .filter-btn { background: transparent; border: 1px solid var(--border); padding: 10px 24px; border-radius: 2px; cursor: pointer; font-weight: 500; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; transition: var(--transition); }
+        .filter-btn { background: transparent; border: 1px solid var(--border); padding: 10px 24px; border-radius: 2px; cursor: pointer; font-weight: 600; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; transition: var(--transition); }
         .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
         .filter-btn.active { background: var(--primary); color: var(--background); border-color: var(--primary); }
 
@@ -114,13 +231,11 @@
         .catalog-section { padding: 4rem 1rem 6rem; max-width: 1400px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 3rem; }
         .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .section-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; font-weight: 400; }
         .catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; }
         
         .product-card { background: var(--surface-alt); border: 1px solid var(--border); display: flex; flex-direction: column; position: relative; transition: var(--transition); cursor: pointer; }
         .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary); }
-        
-        /* Estilo especial para la sub-marca profesional */
         .product-card.professional { border-radius: 0; }
         .product-card.professional .product-img-container { height: 320px; }
         
@@ -129,14 +244,14 @@
         .product-card:hover .product-img { transform: scale(1.03); }
         
         .product-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .product-category { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.15em; margin-bottom: 0.75rem; }
+        .product-category { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 0.75rem; }
         .product-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); line-height: 1.3; }
-        .product-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1; line-height: 1.6; }
+        .product-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1; line-height: 1.6; font-weight: 400; }
         .product-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border); }
-        .product-price { font-size: 1rem; font-weight: 600; color: var(--primary); }
-        .view-btn { background: transparent; color: var(--text); padding: 8px 20px; border-radius: 2px; font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border); transition: var(--transition); }
+        .product-price { font-size: 1rem; font-weight: 700; color: var(--primary); }
+        .view-btn { background: transparent; color: var(--text); padding: 8px 20px; border-radius: 2px; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--border); transition: var(--transition); }
         .view-btn:hover { background: var(--primary); color: var(--background); border-color: var(--primary); }
-        .add-cart-btn { background: var(--primary); color: var(--background); padding: 8px 20px; border-radius: 2px; font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--primary); margin-left: 8px; }
+        .add-cart-btn { background: var(--primary); color: var(--background); padding: 8px 20px; border-radius: 2px; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--primary); margin-left: 8px; }
         .add-cart-btn:hover { background: transparent; color: var(--primary); }
         .add-cart-btn.added { background: var(--text-muted); border-color: var(--text-muted); color: var(--background); }
 
@@ -144,15 +259,15 @@
         .product-view { display: none; padding: 2rem 1rem 6rem; max-width: 1200px; margin: 0 auto; }
         .product-view.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .back-btn { background: transparent; border: 1px solid var(--border); padding: 10px 24px; border-radius: 2px; cursor: pointer; font-weight: 500; color: var(--text); margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .back-btn { background: transparent; border: 1px solid var(--border); padding: 10px 24px; border-radius: 2px; cursor: pointer; font-weight: 600; color: var(--text); margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
         .back-btn:hover { border-color: var(--primary); }
         .product-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; background: var(--surface-alt); padding: 2rem; border: 1px solid var(--border); }
         .main-image { width: 100%; height: 600px; object-fit: cover; background: var(--surface); }
         .product-detail-info h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .detail-category { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.15em; margin-bottom: 1rem; display: inline-block; border-bottom: 1px solid var(--primary); padding-bottom: 4px; }
-        .detail-description { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin: 1.5rem 0; }
+        .detail-category { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 1rem; display: inline-block; border-bottom: 1px solid var(--primary); padding-bottom: 4px; }
+        .detail-description { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin: 1.5rem 0; font-weight: 400; }
         .detail-cta { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
-        .btn-large { padding: 16px 32px; font-size: 0.9rem; border-radius: 2px; font-weight: 500; cursor: pointer; border: 1px solid var(--primary); text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-large { padding: 16px 32px; font-size: 0.85rem; border-radius: 2px; font-weight: 600; cursor: pointer; border: 1px solid var(--primary); text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 8px; }
         .btn-whatsapp-large { background: #25D366; color: white; border-color: #25D366; }
         .btn-whatsapp-large:hover { background: #128C7E; border-color: #128C7E; }
 
@@ -170,39 +285,38 @@
         .cart-item-title { font-family: 'Playfair Display', serif; font-weight: 600; color: var(--text); font-size: 1rem; margin-bottom: 4px; }
         .cart-item-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; transition: var(--transition); }
         .cart-item-remove:hover { color: #ef4444; }
-        .cart-empty { text-align: center; color: var(--text-muted); padding: 4rem 0; font-style: italic; }
+        .cart-empty { text-align: center; color: var(--text-muted); padding: 4rem 0; font-style: italic; font-weight: 400; }
         .cart-footer { position: sticky; bottom: 0; background: var(--background); padding-top: 1.5rem; border-top: 1px solid var(--border); margin-top: 1rem; }
-        .cart-send-btn { width: 100%; background: #25D366; color: white; padding: 16px; border-radius: 2px; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .cart-send-btn { width: 100%; background: #25D366; color: white; padding: 16px; border-radius: 2px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .cart-send-btn:hover { background: #128C7E; }
         .cart-send-btn:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
 
         /* PROCESO */
         .process { background: var(--surface); padding: 6rem 1rem; text-align: center; border-top: 1px solid var(--border); }
         .process h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .process > p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 4rem; }
+        .process > p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 4rem; font-weight: 400; }
         .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
         .step { padding: 2rem; background: var(--background); border: 1px solid var(--border); }
         .step-number { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--border); font-weight: 700; margin-bottom: 1rem; line-height: 1; }
-        .step h3 { font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text); font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-        .step p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+        .step h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--text); font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        .step p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; font-weight: 400; }
 
         /* FOOTER */
         footer { background: var(--primary); color: var(--background); padding: 4rem 1rem 2rem; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
         .footer-col h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 400; }
-        .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 2; display: block; }
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 2; display: block; font-weight: 400; }
         .footer-col a:hover { color: #ffffff; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; font-weight: 400; }
 
         /* BOTÓN FLOTANTE WHATSAPP */
         .float-wpp { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); z-index: 999; transition: var(--transition); }
         .float-wpp svg { width: 30px; height: 30px; }
         .float-wpp:hover { transform: scale(1.1); background: #128C7E; }
 
-        /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* En una versión completa se agregaría un menú hamburguesa */
+            .nav-links { display: none; } 
             .catalog { grid-template-columns: 1fr; }
             .product-detail { grid-template-columns: 1fr; gap: 2rem; padding: 1rem; }
             .main-image { height: 400px; }
@@ -215,7 +329,9 @@
     <!-- HEADER -->
     <header>
         <div class="nav-container">
-            <a href="#" onclick="goHome(); return false;" class="logo">Mhoa</a>
+            <a href="#" onclick="goHome(); return false;" class="logo-container">
+                <img src="logo.png" alt="Mhoa Logo" class="logo-img">
+            </a>
             <nav class="nav-links">
                 <a onclick="navigateTo('catalogo')">Colección</a>
                 <a onclick="navigateTo('linea-profesional')">Línea Profesional</a>
@@ -260,11 +376,29 @@
         </div>
     </section>
 
-    <!-- SEPARADOR SUB-MARCA -->
+    <!-- ========================================= -->
+    <!-- SEPARADOR SUB-MARCA - TRAMA CON BLUR -->
+    <!-- ========================================= -->
     <section id="linea-profesional" class="brand-divider">
-        <span class="sub-brand-badge">Mhoa Professional</span>
-        <h2>Diseño profesional que se siente como alta costura</h2>
-        <p>Uniformes de enfermería y delantales para docencia confeccionados con telas tecnológicas, cortes ergonómicos y la misma atención al detalle que define nuestra marca.</p>
+        <!-- Capa 1: Trama de fondo con blur -->
+        <div class="brand-divider-bg"></div>
+        <!-- Capa 2: Overlay para legibilidad -->
+        <div class="brand-divider-overlay"></div>
+        
+        <!-- Capa 3: Contenido (imagen nítida + texto) -->
+        <div class="brand-divider-content">
+            <!-- Imagen nítida al costado (favicon/logo) -->
+            <div class="divider-image">
+                <img src="favicon.png" alt="Mhoa Professional">
+            </div>
+            
+            <!-- Texto al otro lado -->
+            <div class="divider-text">
+                <span class="sub-brand-badge">Mhoa Professional</span>
+                <h2>Diseño profesional que se siente como alta costura</h2>
+                <p>Uniformes de enfermería y delantales para docencia confeccionados con telas tecnológicas, cortes ergonómicos y la misma atención al detalle que define nuestra marca.</p>
+            </div>
+        </div>
     </section>
 
     <!-- FILTROS -->
@@ -284,9 +418,7 @@
             <h2>Catálogo</h2>
             <p>Piezas únicas y colecciones profesionales diseñadas para perdurar.</p>
         </div>
-        <div class="catalog" id="product-grid">
-            <!-- Se carga dinámicamente desde Google Sheets -->
-        </div>
+        <div class="catalog" id="product-grid"></div>
     </section>
 
     <!-- VISTA DE PRODUCTO -->
@@ -327,7 +459,7 @@
             </div>
             <div class="footer-col">
                 <h3>Contacto</h3>
-                <a href="https://wa.me/5491130568729" target="_blank">WhatsApp: +54 9 11 3056-8729</a>
+                <a href="https://wa.me/5491100000000" target="_blank">WhatsApp: +54 9 11 0000-0000</a>
                 <a href="mailto:hola@mhoa.com">hola@mhoa.com</a>
                 <p style="margin-top: 1rem;">📍 Taller en CABA / Envíos a todo el país</p>
             </div>
@@ -344,7 +476,7 @@
     </footer>
 
     <!-- BOTÓN FLOTANTE WHATSAPP -->
-    <a href="https://wa.me/5491130568729?text=Hola%20Mhoa!%20Quisiera%20hacer%20una%20consulta%20sobre%20sus%20diseños." target="_blank" class="float-wpp" title="Chateá con nosotros">
+    <a href="https://wa.me/5491100000000?text=Hola%20Mhoa!%20Quisiera%20hacer%20una%20consulta%20sobre%20sus%20diseños." target="_blank" class="float-wpp" title="Chateá con nosotros">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
@@ -373,16 +505,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ==========================================
-        // CARGAR PRODUCTOS DESDE GOOGLE SHEETS
-        // ==========================================
         async function cargarProductos() {
             try {
-                // ⚠️ REEMPLAZÁ ESTA URL con la de tu Google Sheet publicado como CSV
-                // Columnas recomendadas: id, title, category, shortDesc, longDesc, price, image, badge
-                const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDDEchlfGdj8mm8zWlXNd9nYZwEcQIuJg2toRUTbnnHIcwnY7hH_pINJfexb3oPMmkcZktmUl6xA5i/pub?gid=0&single=true&output=csv';
-                
-                // Para pruebas, si la URL falla, usamos datos de ejemplo:
+                const sheetURL = 'https://docs.google.com/spreadsheets/d/e/TU_ID_DE_PUBLICACION_AQUI/pub?gid=0&single=true&output=csv';
                 let csvText = '';
                 try {
                     const response = await fetch(sheetURL);
@@ -416,7 +541,6 @@
                             if (p.image3) images.push(p.image3);
                             product.images = images;
                             
-                            // Mapeo de etiquetas para mostrar bonito
                             const catMap = {
                                 'alta costura': 'Alta Costura',
                                 'enfermeria': 'Línea Profesional · Enfermería',
@@ -427,7 +551,6 @@
                             
                             return product;
                         });
-                        
                         renderProductos('todos');
                     }
                 });
@@ -439,18 +562,16 @@
         function renderProductos(category) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = '';
-            
             const filtered = category === 'todos' ? products : products.filter(p => p.category.includes(category));
             
             filtered.forEach(product => {
                 const card = document.createElement('div');
-                // Agregar clase especial si es de la línea profesional para el estilo visual diferenciado
                 const isPro = product.category === 'enfermeria' || product.category === 'docencia';
                 card.className = `product-card ${isPro ? 'professional' : ''}`;
                 
                 let badgeHTML = '';
-                if (product.badge === 'popular') badgeHTML = '<span style="position:absolute; top:15px; left:15px; background:var(--primary); color:var(--background); padding:4px 12px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em;">Popular</span>';
-                if (product.badge === 'new') badgeHTML = '<span style="position:absolute; top:15px; left:15px; background:var(--text-muted); color:var(--background); padding:4px 12px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em;">Nuevo</span>';
+                if (product.badge === 'popular') badgeHTML = '<span style="position:absolute; top:15px; left:15px; background:var(--primary); color:var(--background); padding:4px 12px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Popular</span>';
+                if (product.badge === 'new') badgeHTML = '<span style="position:absolute; top:15px; left:15px; background:var(--text-muted); color:var(--background); padding:4px 12px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Nuevo</span>';
                 
                 const isInCart = cart.some(item => String(item.id) === String(product.id));
                 const btnText = isInCart ? '✓ Agregado' : 'Consultar';
@@ -496,11 +617,11 @@
                 <div class="product-detail-info">
                     <span class="detail-category">${product.categoryLabel}</span>
                     <h1>${product.title}</h1>
-                    <div style="font-size: 1.5rem; font-weight: 600; color: var(--primary); margin-bottom: 1.5rem;">${product.price}</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.5rem;">${product.price}</div>
                     <p class="detail-description">${product.longDesc}</p>
                     
                     <div class="detail-cta">
-                        <a href="https://wa.me/5491130568729?text=${whatsappMsg}" target="_blank" class="btn-large btn-whatsapp-large">Consultar por WhatsApp</a>
+                        <a href="https://wa.me/5491100000000?text=${whatsappMsg}" target="_blank" class="btn-large btn-whatsapp-large">Consultar por WhatsApp</a>
                         <button class="btn-large ${btnClass}" style="background: var(--primary); color: var(--background); border-color: var(--primary);" onclick="toggleCartProduct(${product.id})">${btnText}</button>
                     </div>
                 </div>
@@ -517,7 +638,7 @@
             document.getElementById('productView').classList.remove('active');
             document.getElementById('catalogo').style.display = 'block';
             document.querySelector('.filters-section').style.display = 'block';
-            document.querySelector('.brand-divider').style.display = 'block';
+            document.querySelector('.brand-divider').style.display = 'flex';
         }
 
         function toggleCartProduct(id) {
@@ -579,7 +700,7 @@
             let mensaje = 'Hola Mhoa! Vi su web y me interesan los siguientes artículos para consultar:\n\n';
             cart.forEach((item, idx) => { mensaje += `${idx + 1}. ${item.title}\n`; });
             mensaje += '\n¿Podrían pasarme información sobre precios, talles y plazos de confección?';
-            window.open(`https://wa.me/5491130568729?text=${encodeURIComponent(mensaje)}`, '_blank');
+            window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
         function filterProducts(category, event) {
