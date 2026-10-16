@@ -262,4 +262,474 @@
         .back-btn { background: transparent; border: 1px solid var(--border); padding: 10px 24px; border-radius: 2px; cursor: pointer; font-weight: 600; color: var(--text); margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
         .back-btn:hover { border-color: var(--primary); }
         .product-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; background: var(--surface-alt); padding: 2rem; border: 1px solid var(--border); }
-        .
+        .main-image { width: 100%; height: 600px; object-fit: cover; background: var(--surface); }
+        .product-detail-info h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .detail-category { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 1rem; display: inline-block; border-bottom: 1px solid var(--primary); padding-bottom: 4px; }
+        .detail-description { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin: 1.5rem 0; font-weight: 400; }
+        .detail-cta { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+        .btn-large { padding: 16px 32px; font-size: 0.85rem; border-radius: 2px; font-weight: 600; cursor: pointer; border: 1px solid var(--primary); text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-whatsapp-large { background: #25D366; color: white; border-color: #25D366; }
+        .btn-whatsapp-large:hover { background: #128C7E; border-color: #128C7E; }
+
+        /* CARRITO PANEL */
+        .cart-panel { position: fixed; top: 0; right: -450px; width: 450px; max-width: 100%; height: 100vh; background: var(--background); border-left: 1px solid var(--border); z-index: 200; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; padding: 2rem; }
+        .cart-panel.open { right: 0; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(2px); z-index: 150; display: none; }
+        .cart-overlay.open { display: block; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+        .cart-header h2 { font-size: 1.5rem; font-family: 'Playfair Display', serif; }
+        .cart-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text); }
+        .cart-item { display: flex; gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid var(--border); align-items: center; }
+        .cart-item-img { width: 70px; height: 90px; object-fit: cover; }
+        .cart-item-info { flex-grow: 1; }
+        .cart-item-title { font-family: 'Playfair Display', serif; font-weight: 600; color: var(--text); font-size: 1rem; margin-bottom: 4px; }
+        .cart-item-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; transition: var(--transition); }
+        .cart-item-remove:hover { color: #ef4444; }
+        .cart-empty { text-align: center; color: var(--text-muted); padding: 4rem 0; font-style: italic; font-weight: 400; }
+        .cart-footer { position: sticky; bottom: 0; background: var(--background); padding-top: 1.5rem; border-top: 1px solid var(--border); margin-top: 1rem; }
+        .cart-send-btn { width: 100%; background: #25D366; color: white; padding: 16px; border-radius: 2px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .cart-send-btn:hover { background: #128C7E; }
+        .cart-send-btn:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+
+        /* PROCESO */
+        .process { background: var(--surface); padding: 6rem 1rem; text-align: center; border-top: 1px solid var(--border); }
+        .process h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .process > p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 4rem; font-weight: 400; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
+        .step { padding: 2rem; background: var(--background); border: 1px solid var(--border); }
+        .step-number { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--border); font-weight: 700; margin-bottom: 1rem; line-height: 1; }
+        .step h3 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--text); font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        .step p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; font-weight: 400; }
+
+        /* FOOTER */
+        footer { background: var(--primary); color: var(--background); padding: 4rem 1rem 2rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-col h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 400; }
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 2; display: block; font-weight: 400; }
+        .footer-col a:hover { color: #ffffff; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; font-weight: 400; }
+
+        /* BOTÓN FLOTANTE WHATSAPP */
+        .float-wpp { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); z-index: 999; transition: var(--transition); }
+        .float-wpp svg { width: 30px; height: 30px; }
+        .float-wpp:hover { transform: scale(1.1); background: #128C7E; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } 
+            .catalog { grid-template-columns: 1fr; }
+            .product-detail { grid-template-columns: 1fr; gap: 2rem; padding: 1rem; }
+            .main-image { height: 400px; }
+            .cart-panel { width: 100%; right: -100%; }
+        }
+
+        /* ========================================= */
+        /* CORRECCIÓN MODO OSCURO PARA IMÁGENES */
+        /* ========================================= */
+        body.dark-mode .logo-img {
+            filter: invert(1);
+        }
+        
+        body.dark-mode .divider-image img {
+            filter: invert(1) drop-shadow(0 10px 30px rgba(255,255,255,0.15));
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="nav-container">
+            <a href="#" onclick="goHome(); return false;" class="logo-container">
+                <img src="logo.png" alt="Mhoa Logo" class="logo-img">
+            </a>
+            <nav class="nav-links">
+                <a onclick="navigateTo('catalogo')">Colección</a>
+                <a onclick="navigateTo('linea-profesional')">Línea Profesional</a>
+                <a onclick="navigateTo('proceso')">El Proceso</a>
+                <a onclick="navigateTo('contacto')">Contacto</a>
+            </nav>
+            <div class="controls">
+                <button class="cart-btn" onclick="toggleCart()">
+                    Bolsa <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="control-btn" id="themeBtn" onclick="toggleTheme()">Modo Oscuro</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PANEL CARRITO -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h2>Tu Consulta</h2>
+            <button class="cart-close" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">No hay artículos seleccionados</div>
+        </div>
+        <div class="cart-footer">
+            <button class="cart-send-btn" id="cartSendBtn" onclick="sendCartWhatsApp()" disabled>
+                Enviar consulta por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elegancia a medida.<br><em>Funcionalidad con propósito.</em></h1>
+            <p>Alta costura de autor y diseño profesional para quienes cuidan y enseñan. Cada puntada cuenta una historia de dedicación.</p>
+            <div class="hero-buttons">
+                <a onclick="navigateTo('catalogo')" class="btn-primary" style="cursor:pointer">Explorar Colección</a>
+                <a onclick="navigateTo('linea-profesional')" class="btn-secondary" style="cursor:pointer">Ver Línea Profesional</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- SEPARADOR SUB-MARCA - TRAMA CON BLUR -->
+    <!-- ========================================= -->
+    <section id="linea-profesional" class="brand-divider">
+        <div class="brand-divider-bg"></div>
+        <div class="brand-divider-overlay"></div>
+        
+        <div class="brand-divider-content">
+            <div class="divider-image">
+                <img src="favicon.png" alt="Mhoa Professional">
+            </div>
+            
+            <div class="divider-text">
+                <span class="sub-brand-badge">Mhoa Professional</span>
+                <h2>Diseño profesional que se siente como alta costura</h2>
+                <p>Uniformes de enfermería y delantales para docencia confeccionados con telas tecnológicas, cortes ergonómicos y la misma atención al detalle que define nuestra marca.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="filters-section" id="filtersSection">
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('todos', event)">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('alta costura', event)">Alta Costura</button>
+            <button class="filter-btn" onclick="filterProducts('enfermeria', event)">Enfermería</button>
+            <button class="filter-btn" onclick="filterProducts('docencia', event)">Docencia</button>
+            <button class="filter-btn" onclick="filterProducts('accesorios', event)">Accesorios</button>
+        </div>
+    </section>
+
+    <!-- CATÁLOGO -->
+    <section id="catalogo" class="catalog-section">
+        <div class="section-header">
+            <h2>Catálogo</h2>
+            <p>Piezas únicas y colecciones profesionales diseñadas para perdurar.</p>
+        </div>
+        <div class="catalog" id="product-grid"></div>
+    </section>
+
+    <!-- VISTA DE PRODUCTO -->
+    <section class="product-view" id="productView">
+        <button class="back-btn" onclick="closeProductView()">← Volver al catálogo</button>
+        <div class="product-detail" id="productDetail"></div>
+    </section>
+
+    <!-- PROCESO -->
+    <section id="proceso" class="process">
+        <h2>Nuestro Proceso</h2>
+        <p>De la idea a la prenda final, acompañamos cada paso con dedicación artesanal.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Consulta y Diseño</h3>
+                <p>Nos reunimos para entender tu visión, tomar medidas o definir las necesidades institucionales de tu equipo.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Selección y Prueba</h3>
+                <p>Elegimos juntos las telas y realizamos pruebas de ajuste para garantizar comodidad y estética impecable.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Confección Artesanal</h3>
+                <p>Cada prenda es cortada y cosida a mano o con maquinaria de precisión, controlando cada detalle de calidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Mhoa</h3>
+                <p>Alta costura y diseño profesional. Donde la elegancia se encuentra con la funcionalidad.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <a href="https://wa.me/5491100000000" target="_blank">WhatsApp: +54 9 11 0000-0000</a>
+                <a href="mailto:hola@mhoa.com">hola@mhoa.com</a>
+                <p style="margin-top: 1rem;">📍 Taller en CABA / Envíos a todo el país</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navegación</h3>
+                <a onclick="navigateTo('catalogo')" style="cursor:pointer">Colección</a>
+                <a onclick="navigateTo('linea-profesional')" style="cursor:pointer">Línea Profesional</a>
+                <a onclick="navigateTo('proceso')" style="cursor:pointer">El Proceso</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Mhoa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/5491100000000?text=Hola%20Mhoa!%20Quisiera%20hacer%20una%20consulta%20sobre%20sus%20diseños." target="_blank" class="float-wpp" title="Chateá con nosotros">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script>
+        let products = [];
+        let cart = [];
+        let currentTheme = localStorage.getItem('mhoa_theme') || 'light';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(currentTheme);
+            cargarProductos();
+        });
+
+        function navigateTo(sectionId) {
+            closeProductView();
+            setTimeout(() => {
+                const el = document.getElementById(sectionId);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        function goHome() {
+            closeProductView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function cargarProductos() {
+            try {
+                const sheetURL = 'https://docs.google.com/spreadsheets/d/e/TU_ID_DE_PUBLICACION_AQUI/pub?gid=0&single=true&output=csv';
+                let csvText = '';
+                try {
+                    const response = await fetch(sheetURL);
+                    csvText = await response.text();
+                } catch(e) {
+                    console.log("Usando datos de ejemplo (reemplazar URL del Sheet)");
+                    csvText = `id,title,category,shortDesc,longDesc,price,image,badge
+1,Vestido de Noche Aurelia,alta costura,Vestido largo de seda natural.,Confección a medida con corsé interno y detalles bordados a mano.,$ Consultar,https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600,new
+2,Bata Enfermería Mhoa Pro,enfermeria,Bata clínica de corte moderno.,Tela antilíquidos, bolsillos funcionales y costuras reforzadas. Máxima comodidad para guardias largas.,$ 45.000,https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=600,popular
+3,Delantal Docencia Elegance,docencia,Delantal para profesores con estilo.,Bolsillo para marcadores, tela lavable y corte entallado que no pierde formalidad.,$ 28.000,https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600,`;
+                }
+                
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        products = results.data.map((p, index) => {
+                            const product = {
+                                id: p.id || index + 1,
+                                title: p.title || 'Sin nombre',
+                                category: (p.category || 'general').toLowerCase().trim(),
+                                shortDesc: p.shortDesc || '',
+                                longDesc: p.longDesc || p.shortDesc || '',
+                                price: p.price || 'Consultar',
+                                image: p.image || 'https://via.placeholder.com/600x800/f5f5f5/333?text=Mhoa',
+                                badge: p.badge || ''
+                            };
+                            
+                            const images = [product.image];
+                            if (p.image2) images.push(p.image2);
+                            if (p.image3) images.push(p.image3);
+                            product.images = images;
+                            
+                            const catMap = {
+                                'alta costura': 'Alta Costura',
+                                'enfermeria': 'Línea Profesional · Enfermería',
+                                'docencia': 'Línea Profesional · Docencia',
+                                'accesorios': 'Accesorios'
+                            };
+                            product.categoryLabel = catMap[product.category] || product.category;
+                            
+                            return product;
+                        });
+                        renderProductos('todos');
+                    }
+                });
+            } catch (error) {
+                console.error('Error cargando productos:', error);
+            }
+        }
+
+        function renderProductos(category) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            const filtered = category === 'todos' ? products : products.filter(p => p.category.includes(category));
+            
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                const isPro = product.category === 'enfermeria' || product.category === 'docencia';
+                card.className = `product-card ${isPro ? 'professional' : ''}`;
+                
+                let badgeHTML = '';
+                if (product.badge === 'popular') badgeHTML = '<span style="position:absolute; top:15px; left:15px; background:var(--primary); color:var(--background); padding:4px 12px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Popular</span>';
+                if (product.badge === 'new') badgeHTML = '<span style="position:absolute; top:15px; left:15px; background:var(--text-muted); color:var(--background); padding:4px 12px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Nuevo</span>';
+                
+                const isInCart = cart.some(item => String(item.id) === String(product.id));
+                const btnText = isInCart ? '✓ Agregado' : 'Consultar';
+                const btnClass = isInCart ? 'add-cart-btn added' : 'add-cart-btn';
+                
+                card.innerHTML = `
+                    ${badgeHTML}
+                    <div class="product-img-container" onclick="openProductView(${product.id})">
+                        <img src="${product.images[0]}" alt="${product.title}" class="product-img" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.categoryLabel}</div>
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-desc">${product.shortDesc}</p>
+                        <div class="product-footer">
+                            <span class="product-price">${product.price}</span>
+                            <div>
+                                <button class="view-btn" onclick="event.stopPropagation(); openProductView(${product.id})">Ver</button>
+                                <button class="${btnClass}" onclick="event.stopPropagation(); toggleCartProduct(${product.id})">${btnText}</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openProductView(id) {
+            const product = products.find(p => String(p.id) === String(id));
+            if (!product) return;
+            
+            const detail = document.getElementById('productDetail');
+            const whatsappMsg = encodeURIComponent(`Hola Mhoa! Vi su web y me interesa consultar por: *${product.title}*. ¿Podrían darme más detalles sobre precios y plazos?`);
+            
+            const isInCart = cart.some(item => String(item.id) === String(product.id));
+            const btnText = isInCart ? '✓ Agregado a la bolsa' : 'Agregar a la bolsa de consulta';
+            const btnClass = isInCart ? 'add-cart-btn added' : 'add-cart-btn';
+            
+            detail.innerHTML = `
+                <div class="product-gallery">
+                    <img src="${product.images[0]}" class="main-image" id="mainImage" alt="${product.title}" loading="lazy">
+                </div>
+                <div class="product-detail-info">
+                    <span class="detail-category">${product.categoryLabel}</span>
+                    <h1>${product.title}</h1>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.5rem;">${product.price}</div>
+                    <p class="detail-description">${product.longDesc}</p>
+                    
+                    <div class="detail-cta">
+                        <a href="https://wa.me/5491100000000?text=${whatsappMsg}" target="_blank" class="btn-large btn-whatsapp-large">Consultar por WhatsApp</a>
+                        <button class="btn-large ${btnClass}" style="background: var(--primary); color: var(--background); border-color: var(--primary);" onclick="toggleCartProduct(${product.id})">${btnText}</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('catalogo').style.display = 'none';
+            document.querySelector('.filters-section').style.display = 'none';
+            document.querySelector('.brand-divider').style.display = 'none';
+            document.getElementById('productView').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeProductView() {
+            document.getElementById('productView').classList.remove('active');
+            document.getElementById('catalogo').style.display = 'block';
+            document.querySelector('.filters-section').style.display = 'block';
+            document.querySelector('.brand-divider').style.display = 'flex';
+        }
+
+        function toggleCartProduct(id) {
+            const product = products.find(p => String(p.id) === String(id));
+            if (!product) return;
+            const index = cart.findIndex(item => String(item.id) === String(id));
+            if (index > -1) {
+                cart.splice(index, 1);
+            } else {
+                cart.push(product);
+            }
+            updateCartUI();
+            renderProductos(getCurrentFilter());
+            if (document.getElementById('productView').classList.contains('active')) openProductView(id);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => String(item.id) !== String(id));
+            updateCartUI();
+            renderProductos(getCurrentFilter());
+        }
+
+        function getCurrentFilter() {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            if (!activeBtn) return 'todos';
+            return activeBtn.textContent.toLowerCase().trim() === 'todos' ? 'todos' : activeBtn.textContent.toLowerCase().trim();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').textContent = cart.length;
+            const cartItems = document.getElementById('cartItems');
+            const sendBtn = document.getElementById('cartSendBtn');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="cart-empty">No hay artículos seleccionados</div>';
+                sendBtn.disabled = true;
+                return;
+            }
+            sendBtn.disabled = false;
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.images[0]}" class="cart-item-img" alt="${item.title}" loading="lazy">
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">${item.categoryLabel}</div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart() {
+            document.getElementById('cartPanel').classList.toggle('open');
+            document.getElementById('cartOverlay').classList.toggle('open');
+        }
+
+        function sendCartWhatsApp() {
+            if (cart.length === 0) return;
+            let mensaje = 'Hola Mhoa! Vi su web y me interesan los siguientes artículos para consultar:\n\n';
+            cart.forEach((item, idx) => { mensaje += `${idx + 1}. ${item.title}\n`; });
+            mensaje += '\n¿Podrían pasarme información sobre precios, talles y plazos de confección?';
+            window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(mensaje)}`, '_blank');
+        }
+
+        function filterProducts(category, event) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            if (event) event.target.classList.add('active');
+            renderProductos(category);
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            localStorage.setItem('mhoa_theme', currentTheme);
+            applyTheme(currentTheme);
+        }
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeBtn').innerHTML = '☀️ Claro';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('themeBtn').innerHTML = '🌙 Oscuro';
+            }
+        }
+    </script>
+</body>
+</html>
