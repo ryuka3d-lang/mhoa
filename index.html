@@ -98,9 +98,7 @@
         .btn-secondary { background: transparent; color: var(--text); padding: 14px 36px; border-radius: 2px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid var(--border); }
         .btn-secondary:hover { border-color: var(--primary); }
 
-        /* ========================================= */
-        /* SEPARADOR DE MARCA - TRAMA CON BLUR */
-        /* ========================================= */
+        /* SEPARADOR DE MARCA */
         .brand-divider { 
             position: relative; 
             padding: 6rem 5%; 
@@ -121,15 +119,15 @@
             height: 100%;
             background-image: url('trama-clara.png');
             background-repeat: repeat;
-            background-size: 800px; /* AGRANDADO de 120px a 250px */
+            background-size: 250px;
             filter: blur(1px);
-            opacity: 0.04;
+            opacity: 0.4;
             z-index: 0;
         }
 
         body.dark-mode .brand-divider-bg {
             background-image: url('trama-oscura.png');
-            opacity: 0.04;
+            opacity: 0.35;
         }
 
         .brand-divider-overlay {
@@ -243,6 +241,31 @@
         .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
         .product-card:hover .product-img { transform: scale(1.03); }
         
+        /* BADGES */
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .badge-new {
+            background: #10b981;
+            color: white;
+        }
+        
+        .badge-popular {
+            background: #f59e0b;
+            color: white;
+        }
+        
         .product-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .product-category { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 0.75rem; }
         .product-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); line-height: 1.3; }
@@ -255,14 +278,66 @@
         .add-cart-btn:hover { background: transparent; color: var(--primary); }
         .add-cart-btn.added { background: var(--text-muted); border-color: var(--text-muted); color: var(--background); }
 
-        /* VISTA DE PRODUCTO */
+        /* VISTA DE PRODUCTO CON CARRUSEL */
         .product-view { display: none; padding: 2rem 1rem 6rem; max-width: 1200px; margin: 0 auto; }
         .product-view.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .back-btn { background: transparent; border: 1px solid var(--border); padding: 10px 24px; border-radius: 2px; cursor: pointer; font-weight: 600; color: var(--text); margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 8px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
         .back-btn:hover { border-color: var(--primary); }
         .product-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; background: var(--surface-alt); padding: 2rem; border: 1px solid var(--border); }
-        .main-image { width: 100%; height: 600px; object-fit: cover; background: var(--surface); }
+        
+        /* CARRUSEL */
+        .product-gallery { position: relative; }
+        .carousel-container { position: relative; width: 100%; }
+        .carousel-main { width: 100%; height: 600px; overflow: hidden; border-radius: 4px; background: var(--surface); position: relative; }
+        .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.5s ease; }
+        .carousel-slide.active { opacity: 1; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+        .carousel-btn:hover { background: white; transform: translateY(-50%) scale(1.1); }
+        .carousel-prev { left: 15px; }
+        .carousel-next { right: 15px; }
+        .carousel-thumbnails { display: flex; gap: 10px; margin-top: 1rem; overflow-x: auto; padding: 5px 0; }
+        .carousel-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid var(--border);
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .carousel-thumb:hover { border-color: var(--primary); }
+        .carousel-thumb.active { border-color: var(--primary); border-width: 3px; }
+        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1rem; }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .carousel-dot.active { background: var(--primary); width: 30px; border-radius: 5px; }
+        
         .product-detail-info h1 { font-size: 2.5rem; margin-bottom: 1rem; }
         .detail-category { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 1rem; display: inline-block; border-bottom: 1px solid var(--primary); padding-bottom: 4px; }
         .detail-description { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin: 1.5rem 0; font-weight: 400; }
@@ -319,13 +394,10 @@
             .nav-links { display: none; } 
             .catalog { grid-template-columns: 1fr; }
             .product-detail { grid-template-columns: 1fr; gap: 2rem; padding: 1rem; }
-            .main-image { height: 400px; }
+            .carousel-main { height: 400px; }
             .cart-panel { width: 100%; right: -100%; }
         }
 
-        /* ========================================= */
-        /* CORRECCIÓN MODO OSCURO PARA IMÁGENES */
-        /* ========================================= */
         body.dark-mode .logo-img {
             filter: invert(1);
         }
@@ -337,7 +409,6 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header>
         <div class="nav-container">
             <a href="#" onclick="goHome(); return false;" class="logo-container">
@@ -358,7 +429,6 @@
         </div>
     </header>
 
-    <!-- PANEL CARRITO -->
     <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
     <div class="cart-panel" id="cartPanel">
         <div class="cart-header">
@@ -375,7 +445,6 @@
         </div>
     </div>
 
-    <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
             <h1>Elegancia a medida.<br><em>Funcionalidad con propósito.</em></h1>
@@ -387,9 +456,6 @@
         </div>
     </section>
 
-    <!-- ========================================= -->
-    <!-- SEPARADOR SUB-MARCA - TRAMA CON BLUR -->
-    <!-- ========================================= -->
     <section id="linea-profesional" class="brand-divider">
         <div class="brand-divider-bg"></div>
         <div class="brand-divider-overlay"></div>
@@ -407,7 +473,6 @@
         </div>
     </section>
 
-    <!-- FILTROS -->
     <section class="filters-section" id="filtersSection">
         <div class="filters">
             <button class="filter-btn active" onclick="filterProducts('todos', event)">Todos</button>
@@ -418,7 +483,6 @@
         </div>
     </section>
 
-    <!-- CATÁLOGO -->
     <section id="catalogo" class="catalog-section">
         <div class="section-header">
             <h2>Catálogo</h2>
@@ -427,13 +491,11 @@
         <div class="catalog" id="product-grid"></div>
     </section>
 
-    <!-- VISTA DE PRODUCTO -->
     <section class="product-view" id="productView">
         <button class="back-btn" onclick="closeProductView()">← Volver al catálogo</button>
         <div class="product-detail" id="productDetail"></div>
     </section>
 
-    <!-- PROCESO -->
     <section id="proceso" class="process">
         <h2>Nuestro Proceso</h2>
         <p>De la idea a la prenda final, acompañamos cada paso con dedicación artesanal.</p>
@@ -456,7 +518,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer id="contacto">
         <div class="footer-content">
             <div class="footer-col">
@@ -481,7 +542,6 @@
         </div>
     </footer>
 
-    <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a href="https://wa.me/5491100000000?text=Hola%20Mhoa!%20Quisiera%20hacer%20una%20consulta%20sobre%20sus%20diseños." target="_blank" class="float-wpp" title="Chateá con nosotros">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -492,6 +552,7 @@
         let products = [];
         let cart = [];
         let currentTheme = localStorage.getItem('mhoa_theme') || 'light';
+        let currentCarouselIndex = 0;
 
         document.addEventListener('DOMContentLoaded', () => {
             applyTheme(currentTheme);
@@ -513,17 +574,15 @@
 
         async function cargarProductos() {
             try {
-                const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDDEchlfGdj8mm8zWlXNd9nYZwEcQIuJg2toRUTbnnHIcwnY7hH_pINJfexb3oPMmkcZktmUl6xA5i/pub?gid=0&single=true&output=csv';
+                const sheetURL = 'https://docs.google.com/spreadsheets/d/e/TU_ID_DE_PUBLICACION_AQUI/pub?gid=0&single=true&output=csv';
                 let csvText = '';
                 try {
                     const response = await fetch(sheetURL);
                     csvText = await response.text();
                 } catch(e) {
-                    console.log("Usando datos de ejemplo (reemplazar URL del Sheet)");
-                    csvText = `id,title,category,shortDesc,longDesc,price,image,badge
-1,Vestido de Noche Aurelia,alta costura,Vestido largo de seda natural.,Confección a medida con corsé interno y detalles bordados a mano.,$ Consultar,https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600,new
-2,Bata Enfermería Mhoa Pro,enfermeria,Bata clínica de corte moderno.,Tela antilíquidos, bolsillos funcionales y costuras reforzadas. Máxima comodidad para guardias largas.,$ 45.000,https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=600,popular
-3,Delantal Docencia Elegance,docencia,Delantal para profesores con estilo.,Bolsillo para marcadores, tela lavable y corte entallado que no pierde formalidad.,$ 28.000,https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600,`;
+                    console.log("Usando datos de ejemplo");
+                    csvText = `id,title,category,shortDesc,longDesc,price,image,image2,image3,image4,badge
+1,Ainhoa,alta costura,Vestido elegante,Descripción larga,$ Consultar,https://i.postimg.cc/m2cc3gm/Buster-1.jpg,https://i.postimg.cc/TYyyk3S/Buster-2.jpg,https://i.postimg.cc/VLSS79kh/Buster-3.jpg,https://i.postimg.cc/jdWV86SL/Buster-4.jpg,Nuevo`;
                 }
                 
                 Papa.parse(csvText, {
@@ -539,12 +598,13 @@
                                 longDesc: p.longDesc || p.shortDesc || '',
                                 price: p.price || 'Consultar',
                                 image: p.image || 'https://via.placeholder.com/600x800/f5f5f5/333?text=Mhoa',
-                                badge: p.badge || ''
+                                badge: (p.badge || '').trim().toLowerCase()
                             };
                             
                             const images = [product.image];
-                            if (p.image2) images.push(p.image2);
-                            if (p.image3) images.push(p.image3);
+                            if (p.image2 && p.image2.trim()) images.push(p.image2.trim());
+                            if (p.image3 && p.image3.trim()) images.push(p.image3.trim());
+                            if (p.image4 && p.image4.trim()) images.push(p.image4.trim());
                             product.images = images;
                             
                             const catMap = {
@@ -576,8 +636,11 @@
                 card.className = `product-card ${isPro ? 'professional' : ''}`;
                 
                 let badgeHTML = '';
-                if (product.badge === 'popular') badgeHTML = '<span style="position:absolute; top:15px; left:15px; background:var(--primary); color:var(--background); padding:4px 12px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Popular</span>';
-                if (product.badge === 'new') badgeHTML = '<span style="position:absolute; top:15px; left:15px; background:var(--text-muted); color:var(--background); padding:4px 12px; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">Nuevo</span>';
+                if (product.badge === 'nuevo') {
+                    badgeHTML = '<span class="product-badge badge-new">Nuevo</span>';
+                } else if (product.badge === 'popular') {
+                    badgeHTML = '<span class="product-badge badge-popular">Popular</span>';
+                }
                 
                 const isInCart = cart.some(item => String(item.id) === String(product.id));
                 const btnText = isInCart ? '✓ Agregado' : 'Consultar';
@@ -609,6 +672,8 @@
             const product = products.find(p => String(p.id) === String(id));
             if (!product) return;
             
+            currentCarouselIndex = 0;
+            
             const detail = document.getElementById('productDetail');
             const whatsappMsg = encodeURIComponent(`Hola Mhoa! Vi su web y me interesa consultar por: *${product.title}*. ¿Podrían darme más detalles sobre precios y plazos?`);
             
@@ -616,9 +681,48 @@
             const btnText = isInCart ? '✓ Agregado a la bolsa' : 'Agregar a la bolsa de consulta';
             const btnClass = isInCart ? 'add-cart-btn added' : 'add-cart-btn';
             
+            let carouselHTML = '';
+            if (product.images.length > 1) {
+                const slides = product.images.map((img, idx) => 
+                    `<div class="carousel-slide ${idx === 0 ? 'active' : ''}">
+                        <img src="${img}" alt="${product.title} - Foto ${idx + 1}" loading="lazy">
+                    </div>`
+                ).join('');
+                
+                const thumbnails = product.images.map((img, idx) => 
+                    `<img src="${img}" class="carousel-thumb ${idx === 0 ? 'active' : ''}" onclick="goToSlide(${idx})" alt="Thumbnail ${idx + 1}" loading="lazy">`
+                ).join('');
+                
+                const dots = product.images.map((_, idx) => 
+                    `<div class="carousel-dot ${idx === 0 ? 'active' : ''}" onclick="goToSlide(${idx})"></div>`
+                ).join('');
+                
+                carouselHTML = `
+                    <div class="carousel-container">
+                        <div class="carousel-main">
+                            ${slides}
+                            <button class="carousel-btn carousel-prev" onclick="prevSlide()">‹</button>
+                            <button class="carousel-btn carousel-next" onclick="nextSlide()">›</button>
+                        </div>
+                        <div class="carousel-thumbnails">${thumbnails}</div>
+                        <div class="carousel-dots">${dots}</div>
+                    </div>
+                `;
+            } else {
+                carouselHTML = `
+                    <div class="carousel-container">
+                        <div class="carousel-main">
+                            <div class="carousel-slide active">
+                                <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
             detail.innerHTML = `
                 <div class="product-gallery">
-                    <img src="${product.images[0]}" class="main-image" id="mainImage" alt="${product.title}" loading="lazy">
+                    ${carouselHTML}
                 </div>
                 <div class="product-detail-info">
                     <span class="detail-category">${product.categoryLabel}</span>
@@ -638,6 +742,36 @@
             document.querySelector('.brand-divider').style.display = 'none';
             document.getElementById('productView').classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const thumbs = document.querySelectorAll('.carousel-thumb');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            if (!slides[index]) return;
+            
+            slides.forEach(s => s.classList.remove('active'));
+            thumbs.forEach(t => t.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            if (thumbs[index]) thumbs[index].classList.add('active');
+            if (dots[index]) dots[index].classList.add('active');
+            
+            currentCarouselIndex = index;
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const nextIndex = (currentCarouselIndex + 1) % slides.length;
+            goToSlide(nextIndex);
+        }
+
+        function prevSlide() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevIndex = (currentCarouselIndex - 1 + slides.length) % slides.length;
+            goToSlide(prevIndex);
         }
 
         function closeProductView() {
@@ -691,7 +825,7 @@
                         <div class="cart-item-title">${item.title}</div>
                         <div style="font-size: 0.8rem; color: var(--text-muted);">${item.categoryLabel}</div>
                     </div>
-                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})"></button>
                 </div>
             `).join('');
         }
@@ -727,7 +861,7 @@
                 document.getElementById('themeBtn').innerHTML = '☀️ Claro';
             } else {
                 document.body.classList.remove('dark-mode');
-                document.getElementById('themeBtn').innerHTML = ' Oscuro';
+                document.getElementById('themeBtn').innerHTML = '🌙 Oscuro';
             }
         }
     </script>
