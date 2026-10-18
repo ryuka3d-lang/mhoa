@@ -121,15 +121,15 @@
             height: 100%;
             background-image: url('trama-clara.png');
             background-repeat: repeat;
-            background-size: 100px; /* Más chico = más denso el patrón */
-            filter: blur(0px); /* SIN blur para que se vea nítida */
-            opacity: 0.15; /* Opacidad más alta para que se note */
+            background-size: 120px;
+            filter: blur(1px);
+            opacity: 0.4; /* AUMENTADO de 0.15 a 0.4 */
             z-index: 0;
         }
 
         body.dark-mode .brand-divider-bg {
             background-image: url('trama-oscura.png');
-            opacity: 0.12;
+            opacity: 0.35;
         }
 
         .brand-divider-overlay {
@@ -138,12 +138,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.85); /* Más opaco para que el texto se lea bien */
+            background: rgba(255, 255, 255, 0.4); /* REDUCIDO de 0.85 a 0.4 */
             z-index: 1;
         }
 
         body.dark-mode .brand-divider-overlay {
-            background: rgba(10, 10, 10, 0.85);
+            background: rgba(10, 10, 10, 0.4);
         }
 
         .brand-divider-content {
@@ -727,7 +727,7 @@
                 document.getElementById('themeBtn').innerHTML = '☀️ Claro';
             } else {
                 document.body.classList.remove('dark-mode');
-                document.getElementById('themeBtn').innerHTML = '🌙 Oscuro';
+                document.getElementById('themeBtn').innerHTML = ' Oscuro';
             }
         }
     </script>
