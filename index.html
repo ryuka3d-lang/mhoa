@@ -119,15 +119,15 @@
             height: 100%;
             background-image: url('trama-clara.png');
             background-repeat: repeat;
-            background-size: 250px;
+            background-size: 500px;
             filter: blur(1px);
-            opacity: 0.4;
+            opacity: 0.04;
             z-index: 0;
         }
 
         body.dark-mode .brand-divider-bg {
             background-image: url('trama-oscura.png');
-            opacity: 0.35;
+            opacity: 0.04;
         }
 
         .brand-divider-overlay {
@@ -574,7 +574,7 @@
 
         async function cargarProductos() {
             try {
-                const sheetURL = 'https://docs.google.com/spreadsheets/d/e/TU_ID_DE_PUBLICACION_AQUI/pub?gid=0&single=true&output=csv';
+                const sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDDEchlfGdj8mm8zWlXNd9nYZwEcQIuJg2toRUTbnnHIcwnY7hH_pINJfexb3oPMmkcZktmUl6xA5i/pub?gid=0&single=true&output=csv';
                 let csvText = '';
                 try {
                     const response = await fetch(sheetURL);
