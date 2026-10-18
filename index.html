@@ -602,14 +602,14 @@
                             };
                             
                             const images = [product.image];
-                            if (p.image2 && p.image2.trim()) images.push(p.image2.trim());
-                            if (p.image3 && p.image3.trim()) images.push(p.image3.trim());
-                            if (p.image4 && p.image4.trim()) images.push(p.image4.trim());
-                            if (p.image5 && p.image5.trim()) images.push(p.image5.trim());
-                            if (p.image6 && p.image6.trim()) images.push(p.image6.trim());
-                            if (p.image7 && p.image7.trim()) images.push(p.image7trim());
-                            if (p.image8 && p.image8.trim()) images.push(p.image8.trim());
-                            product.images = images;
+if (p.image2 && p.image2.trim()) images.push(p.image2.trim());
+if (p.image3 && p.image3.trim()) images.push(p.image3.trim());
+if (p.image4 && p.image4.trim()) images.push(p.image4.trim());
+if (p.image5 && p.image5.trim()) images.push(p.image5.trim()); // Agregado
+if (p.image6 && p.image6.trim()) images.push(p.image6.trim()); // Agregado
+if (p.image7 && p.image7.trim()) images.push(p.image7.trim()); // Agregado
+if (p.image8 && p.image8.trim()) images.push(p.image8.trim()); // Agregado
+product.images = images;
                             
                             const catMap = {
                                 'alta costura': 'Alta Costura',
